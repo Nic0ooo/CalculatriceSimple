@@ -11,27 +11,35 @@
         android:id="@+id/calcul"
         android:layout_width="362dp"
         android:layout_height="98dp"
+        android:layout_marginBottom="136dp"
         android:background="#9AA2D7"
         android:fontFamily="sans-serif-smallcaps"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="192dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/resultat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/resultat"
         android:layout_width="321dp"
         android:layout_height="69dp"
+        android:layout_marginBottom="36dp"
         android:background="#9999C1"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Résultat"
         android:textStyle="italic"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="316dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TableLayout
-        android:layout_width="409dp"
-        android:layout_height="571dp"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="446dp">
+        android:id="@+id/tableLayout"
+        android:layout_width="351dp"
+        android:layout_height="254dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TableRow
             android:layout_width="match_parent"
@@ -100,7 +108,7 @@
                 style="@android:style/Widget.Material.Light.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="X"
+                android:text="*"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </TableRow>
 
@@ -207,11 +215,17 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="189dp"
+        android:layout_marginEnd="340dp"
+        android:layout_marginBottom="55dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="="
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="342dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="@+id/resultat"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calcul" />
 
     <TextView
         android:id="@+id/titleCalculatrice"
@@ -220,6 +234,8 @@
         android:fontFamily="serif-monospace"
         android:text="Calculatrice"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="73dp" />
+        app:layout_constraintBottom_toTopOf="@+id/calcul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

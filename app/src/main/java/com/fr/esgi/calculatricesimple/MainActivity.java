@@ -1,15 +1,15 @@
 package com.fr.esgi.calculatricesimple;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.TextView;
+        import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView result;
+    private TextView operation;
     private double operand1 = 0;
     private double operand2 = 0;
     private String currentOperator = "";
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         result = findViewById(R.id.resultat);
+        operation = findViewById(R.id.calcul);
 
         setNumberButtonListeners();
         setOperatorButtonListeners();
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     result.append(number);
                 }
+                updateCalcul();
             }
         };
 
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setOperatorButtonListeners() {
-        int[] operatorButtonIds = {R.id.addition, R.id.soustraction, R.id.multiplication, R.id.division};
+        int[] operatorButtonIds = {R.id.addition, R.id.soustraction, R.id.multiplication, R.id.division, R.id.pourcentage};
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -73,28 +75,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 operand2 = Double.parseDouble(result.getText().toString());
-                double result = 0;
-                switch (currentOperator) {
-                    case "+":
-                        result = operand1 + operand2;
-                        break;
-                    case "-":
-                        result = operand1 - operand2;
-                        break;
-                    case "*":
-                        result = operand1 * operand2;
-                        break;
-                    case "/":
-                        if (operand2 != 0) {
-                            result = operand1 / operand2;
-                        } else {
-                            result.setText("Error");
-                            return;
-                        }
-                        break;
-                }
-                result.setText(String.valueOf(result));
+                double calcResult = performCalculation();
+                result.setText(String.valueOf(calcResult));
                 isNewOperation = true;
+                updateCalcul();
             }
         });
     }
@@ -103,12 +87,47 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                result.setText("0");
+                result.setText("Resultat");
+                operation.setText("");
                 operand1 = 0;
                 operand2 = 0;
                 currentOperator = "";
                 isNewOperation = true;
             }
         });
+    }
+
+    private double performCalculation() {
+        switch (currentOperator) {
+            case "+":
+                return operand1 + operand2;
+            case "-":
+                return operand1 - operand2;
+            case "*":
+                return operand1 * operand2;
+            case "/":
+                if (operand2 != 0) {
+                    return operand1 / operand2;
+                } else {
+                    result.setText("Error");
+                    return 0;
+                }
+            case "%":
+                if (operand2 != 0) {
+                    return (operand1 / operand2) * 100;
+                } else {
+                    result.setText("Error");
+                    return 0;
+                }
+            case "+ / -":
+                return -operand1;
+            default:
+                return operand1;
+        }
+    }
+
+    private void updateCalcul() {
+        String calculText = operand1 + " " + currentOperator + " " + result.getText().toString();
+        operation.setText(calculText);
     }
 }
